@@ -19,7 +19,7 @@ public class PizzeriaAdmin {
 	public static void main(String[] args) {
 		PizzaDaoMemoire.initPizzas();
 		input = new Scanner(System.in);
-		Menu m = new Menu("***** Pizzeria Administration *****", 5);
+		Menu m = new Menu("***** Pizzeria Administration *****");
 		m.manage();
 		input.close();
 	}

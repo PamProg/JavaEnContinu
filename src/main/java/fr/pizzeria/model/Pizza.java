@@ -3,6 +3,9 @@ package fr.pizzeria.model;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Objet principal du projet. Contient toutes les informations relatives à une pizza.
  * @author ETY15
@@ -20,6 +23,8 @@ public class Pizza {
 	private CategoriePizza categorie;
 	
 	private static Integer idGenerator = 0;
+	
+	private static final Logger LOG = LoggerFactory.getLogger(Pizza.class);
 	
 	
 	/**
@@ -129,17 +134,6 @@ public class Pizza {
 		
 		StringBuilder sb = new StringBuilder();
 		
-//		for(Field field : this.getClass().getDeclaredFields()) {
-//			if(field.getDeclaredAnnotation(ToString.class) != null) {
-//				try {
-//					Object obj = field.get(this);
-//					sb.append(obj.toString());
-//				} catch (IllegalArgumentException | IllegalAccessException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}
-		
 		// Pour chaque attribut
 		for(Field field : this.getClass().getDeclaredFields()) {
 			// Pour chaque annotation (de chaque attribut)
@@ -153,15 +147,13 @@ public class Pizza {
 						sb.append(obj.toString());
 						sb.append(" ");
 					} catch (IllegalArgumentException | IllegalAccessException e) {
-						e.printStackTrace();
+						LOG.error("Erreur", e);
 					}
 				}
 			}
 		}
 		
 		
-		
-//		return "Pizza [id=" + id + ", code=" + code + ", nom=" + nom + ", prix=" + prix + ", categorie=" + categorie + "]";
 		// Renvoie le StringBuilder contenant tout les noms d'attributs.
 		return sb.toString();
 	}

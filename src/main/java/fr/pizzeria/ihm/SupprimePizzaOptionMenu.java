@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.console.PizzeriaAdmin;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
@@ -12,6 +15,7 @@ import fr.pizzeria.dao.PizzaDaoMemoire;
 public class SupprimePizzaOptionMenu extends OptionMenu {
 
 	private IPizzaDao dao;
+	private static final Logger LOG = LoggerFactory.getLogger(SupprimePizzaOptionMenu.class);
 	
 	public SupprimePizzaOptionMenu(String libelle) {
 		super(libelle);
@@ -26,8 +30,8 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 		
 		dao = new PizzaDaoMemoire();
 		
-		System.out.println("Veuillez choisir le code de la pizza à supprimer.");
-		System.out.println("(99 pour abandonner)");
+		LOG.info("Veuillez choisir le code de la pizza à supprimer.");
+		LOG.info("(99 pour abandonner)");
 		
 		String codeChosen = PizzeriaAdmin.getInput().next();
 		

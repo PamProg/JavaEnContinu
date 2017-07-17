@@ -3,6 +3,9 @@ package fr.pizzeria.ihm;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.console.PizzeriaAdmin;
 
 /**
@@ -16,7 +19,9 @@ public class Menu {
 	private String titre;
 	private Map<Integer, OptionMenu> actions;
 	
-	public Menu(String titre, int nbActions) {
+	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
+	
+	public Menu(String titre) {
 		this.titre = titre;
 		actions = new HashMap<Integer, OptionMenu>();
 	}
@@ -37,21 +42,21 @@ public class Menu {
 			
 			switch (response) {
 				case 1: 
-					System.out.println("Liste des pizzas"); 
+					LOG.info("Liste des pizzas");
 					actions.get(0).execute();
 					break; 
 				case 2: 
-					System.out.println("Ajout d'une nouvelle pizza"); 
+					LOG.info("Ajout d'une nouvelle pizza");
 					actions.get(1).execute();
 					break; 
 				case 3: 
 					actions.get(0).execute();
-					System.out.println("Mise à jour d'une pizza");
+					LOG.info("Mise à jour d'une pizza");
 					actions.get(2).execute();
 					break; 
 				case 4: 
 					actions.get(0).execute();
-					System.out.println("Suppression d'une pizza");
+					LOG.info("Suppression d'une pizza");
 					actions.get(3).execute();
 					break; 
 				case 99: 
@@ -79,10 +84,10 @@ public class Menu {
 	 * Affiche le menu principal de la pizzeria
 	 */
 	public void afficherMenu() {
-		System.out.println(titre);
+		LOG.info(titre);
 		
 		for(OptionMenu o : actions.values()) {
-			System.out.println(o.getLibelle());
+			LOG.info(o.getLibelle());
 		}
 	}
 	

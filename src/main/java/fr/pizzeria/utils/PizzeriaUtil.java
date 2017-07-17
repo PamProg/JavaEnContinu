@@ -5,6 +5,8 @@ package fr.pizzeria.utils;
  * Permet la factorisation d'une partie du code.
  */
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.console.PizzeriaAdmin;
 import fr.pizzeria.exception.CodeDontMatchException;
@@ -19,6 +21,7 @@ import fr.pizzeria.model.CategoriePizza;
  */
 public class PizzeriaUtil {
 
+	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaUtil.class);
 	
 	/**
 	 * Demande la catégorie de la pizza et vérifie qu'elle soit valide
@@ -31,7 +34,7 @@ public class PizzeriaUtil {
 		String categorieString = null;
 		CategoriePizza cat = null;
 		
-		System.out.println("Veuillez saisir la catégorie");
+		LOG.info("Veuillez saisir la catégorie");
 		
 		categorieString = PizzeriaAdmin.getInput().next();
 		
@@ -55,7 +58,7 @@ public class PizzeriaUtil {
 		// Boucle tant que le prix entré n'est pas bon
 		do {
 			correct = true;
-			System.out.println("Veuillez saisir le prix");
+			LOG.info("Veuillez saisir le prix");
 			try {
 				prixString = PizzeriaAdmin.getInput().next();
 				
@@ -65,7 +68,7 @@ public class PizzeriaUtil {
 					throw new PriceDontMatchException();
 				}
 			} catch (PriceDontMatchException e) {
-				System.err.println(e.getMessage());
+				LOG.warn(e.getMessage());
 				correct = false;
 			}
 		} while (!correct);
@@ -83,7 +86,7 @@ public class PizzeriaUtil {
 		// Boucle tant que le nom entré n'est pas bon
 		do {
 			correct = true;
-			System.out.println("Veuillez saisir le nom (sans espace)");
+			LOG.info("Veuillez saisir le nom (sans espace)");
 			try {
 				nomString = PizzeriaAdmin.getInput().next();
 				
@@ -92,7 +95,7 @@ public class PizzeriaUtil {
 					throw new NameDontMatchException();
 				}
 			} catch (NameDontMatchException e) {
-				System.err.println(e.getMessage());
+				LOG.warn(e.getMessage());
 				correct = false;
 			}
 		} while (!correct);
@@ -110,7 +113,7 @@ public class PizzeriaUtil {
 		// Boucle tant que le code entré n'est pas bon
 		do {
 			correct = true;
-			System.out.println("Veuillez saisir le code");
+			LOG.info("Veuillez saisir le code");
 			try {
 				codeString = PizzeriaAdmin.getInput().next();
 				
@@ -119,7 +122,7 @@ public class PizzeriaUtil {
 					throw new CodeDontMatchException();
 				}
 			} catch (CodeDontMatchException e) {
-				System.err.println(e.getMessage());
+				LOG.warn(e.getMessage());
 				correct = false;
 			}
 		} while (!correct);

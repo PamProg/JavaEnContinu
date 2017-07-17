@@ -1,6 +1,9 @@
 
 target/
+bin/
+
 .settings
 .project
 .classpath
-bin
+
+*.log

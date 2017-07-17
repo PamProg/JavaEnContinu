@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Permet de sortir du menu
  * @author Pam
@@ -7,6 +10,8 @@ package fr.pizzeria.ihm;
  */
 public class SortirOptionMenu extends OptionMenu {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SortirOptionMenu.class);
+	
 	public SortirOptionMenu(String libelle) {
 		super(libelle);
 	}
@@ -18,7 +23,7 @@ public class SortirOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute() {
 		
-		System.out.println("Aurevoir ♪");
+		LOG.info("Aurevoir ♪");
 		
 		return true;
 	}

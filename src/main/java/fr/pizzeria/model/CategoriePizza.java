@@ -9,7 +9,7 @@ public enum CategoriePizza {
 	
 	VIANDE("Viande"), FROMAGE("Fromage"), VEGETARIEN("Végétarien");
 	
-	String libelle;
+	private String libelle;
 	
 	private CategoriePizza(String libelle) {
 		this.libelle = libelle;
@@ -25,7 +25,7 @@ public enum CategoriePizza {
 	/**
 	 * @param libelle the libelle to set
 	 */
-	public void setLibelle(String libelle) {
+	private void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 	
