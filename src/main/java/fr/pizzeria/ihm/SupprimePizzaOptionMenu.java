@@ -19,6 +19,7 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 	
 	public SupprimePizzaOptionMenu(String libelle) {
 		super(libelle);
+		dao = new PizzaDaoMemoire();
 	}
 
 	/**
@@ -27,8 +28,6 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 	 */
 	@Override
 	public boolean execute() {
-		
-		dao = new PizzaDaoMemoire();
 		
 		LOG.info("Veuillez choisir le code de la pizza à supprimer.");
 		LOG.info("(99 pour abandonner)");

@@ -25,6 +25,7 @@ public enum CategoriePizza {
 	/**
 	 * @param libelle the libelle to set
 	 */
+	@SuppressWarnings("unused")
 	private void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}

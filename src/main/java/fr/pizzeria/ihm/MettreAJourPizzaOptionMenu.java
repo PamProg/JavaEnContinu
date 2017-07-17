@@ -22,6 +22,7 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 	
 	public MettreAJourPizzaOptionMenu(String libelle) {
 		super(libelle);
+		dao = new PizzaDaoMemoire();
 	}
 
 	/**
@@ -31,8 +32,6 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 	 */
 	@Override
 	public boolean execute() {
-		
-		dao = new PizzaDaoMemoire();
 		
 		LOG.info("Veuillez choisir le code de la pizza à modifier.");
 		LOG.info("(99 pour abandonner)");

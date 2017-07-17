@@ -15,14 +15,14 @@ import fr.pizzeria.model.Pizza;
  */
 public class PizzaDaoMemoire implements IPizzaDao {
 
-	static private List<Pizza> pizzas;
+	private static List<Pizza> pizzas;
 	
 	/**
 	 * Initialise les pizzas originelles
 	 */
-	static public void initPizzas() {
+	public static void initPizzas() {
 		
-		pizzas = new ArrayList<Pizza>();
+		pizzas = new ArrayList<>();
 		
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.FROMAGE));

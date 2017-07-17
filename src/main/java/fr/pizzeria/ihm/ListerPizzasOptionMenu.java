@@ -19,6 +19,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	
 	public ListerPizzasOptionMenu(String libelle) {
 		super(libelle);
+		dao = new PizzaDaoMemoire();
 	}
 
 	/**
@@ -26,8 +27,6 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	 */
 	@Override
 	public boolean execute() {
-		
-		dao = new PizzaDaoMemoire();
 		
 		for(Pizza p : dao.findAllPizzas()) {
 			// Le test n'est théoriquement plus nécessaire

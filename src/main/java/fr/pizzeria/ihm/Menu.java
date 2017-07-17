@@ -23,7 +23,7 @@ public class Menu {
 	
 	public Menu(String titre) {
 		this.titre = titre;
-		actions = new HashMap<Integer, OptionMenu>();
+		actions = new HashMap<>();
 	}
 	
 	/**
@@ -62,8 +62,9 @@ public class Menu {
 				case 99: 
 					actions.get(4).execute();
 					break; 
-//				default:
-//					break;
+				default:
+					LOG.warn("Saisie incorrecte");
+					break;
 			}
 		} while (response != 99);
 		
