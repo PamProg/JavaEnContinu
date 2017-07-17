@@ -28,9 +28,24 @@
 		</encoder>
 	</appender>
 	
-	<!-- politique de log pour les classes du package fr.pizzeria.ihm -->
+	<!-- redirection vers un fichier : err.log -->
+	<appender name="ERR" class="ch.qos.logback.core.FileAppender">
+		<file>err.log</file>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- politique de log pour les classes du package fr.pizzeria -->
 	<logger name="fr.pizzeria" level="INFO">
 		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<!-- politique de log pour les erreurs des classes du package fr.pizzeria -->
+	<logger name="error-log" level="ERROR">
+		<appender-ref ref="ERR" />
 	</logger>
 	
 	<!-- trace d'exécution du programme -->

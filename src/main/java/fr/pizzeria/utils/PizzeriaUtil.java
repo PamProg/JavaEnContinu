@@ -22,6 +22,7 @@ import fr.pizzeria.model.CategoriePizza;
 public class PizzeriaUtil {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaUtil.class);
+	private static final Logger LOGERROR = LoggerFactory.getLogger("error-log");
 	
 	/**
 	 * Demande la catégorie de la pizza et vérifie qu'elle soit valide
@@ -69,7 +70,7 @@ public class PizzeriaUtil {
 				}
 			} catch (PriceDontMatchException e) {
 				LOG.warn(e.getMessage());
-				LOG.error("Erreur Price", e);
+				LOGERROR.error("Erreur Price", e);
 				correct = false;
 			}
 		} while (!correct);
@@ -97,7 +98,7 @@ public class PizzeriaUtil {
 				}
 			} catch (NameDontMatchException e) {
 				LOG.warn(e.getMessage());
-				LOG.error("Erreur Name", e);
+				LOGERROR.error("Erreur Name", e);
 				correct = false;
 			}
 		} while (!correct);
@@ -125,7 +126,7 @@ public class PizzeriaUtil {
 				}
 			} catch (CodeDontMatchException e) {
 				LOG.warn(e.getMessage());
-				LOG.error("Erreur Code", e);
+				LOGERROR.error("Erreur Code", e);
 				correct = false;
 			}
 		} while (!correct);
