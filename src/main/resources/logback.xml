@@ -8,7 +8,7 @@
 		</encoder>
 	</appender>
 	
-	<!-- redirection vers un fichier -->
+	<!-- redirection vers un fichier : app.log -->
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
 		<file>app.log</file>
 		<append>true</append>
@@ -18,17 +18,27 @@
 		</encoder>
 	</appender>
 	
+	<!-- redirection vers un fichier : execution.log -->
+	<appender name="EXECUTION" class="ch.qos.logback.core.FileAppender">
+		<file>execution.log</file>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
 	<!-- politique de log pour les classes du package fr.pizzeria.ihm -->
-	<logger name="fr.pizzeria.ihm" level="INFO">
+	<logger name="fr.pizzeria" level="INFO">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
-	<!-- politique de log pour les classes du package fr.pizzeria.utils -->
-	<logger name="fr.pizzeria.utils" level="INFO">
-		<appender-ref ref="STDOUT" />
+	<!-- trace d'exécution du programme -->
+	<logger name="execution-log" level="DEBUG">
+		<appender-ref ref="EXECUTION" />
 	</logger>
 	
-	<!-- règle de logs par défaut. Ici : niveau DEBUG vers la sortie standard -->
+	<!-- règle de logs par défaut. Ici : niveau DEBUG vers la un fichier -->
 	<root level="DEBUG">
 		<appender-ref ref="FILE" />
 	</root>

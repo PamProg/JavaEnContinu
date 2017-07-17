@@ -3,6 +3,9 @@ package fr.pizzeria.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -16,6 +19,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoire implements IPizzaDao {
 
 	private static List<Pizza> pizzas;
+	private static final Logger LOGEXEC = LoggerFactory.getLogger("execution-log");
 	
 	/**
 	 * Initialise les pizzas originelles
@@ -23,6 +27,8 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	public static void initPizzas() {
 		
 		pizzas = new ArrayList<>();
+		
+		LOGEXEC.debug("Initialisation des pizzas...");
 		
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.FROMAGE));
@@ -32,6 +38,8 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.FROMAGE));
 		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VEGETARIEN));
 		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
+		
+		LOGEXEC.debug("...pizzas initialisées");
 	}
 	
 	/**
@@ -39,6 +47,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	 */
 	@Override
 	public List<Pizza> findAllPizzas() {
+		LOGEXEC.debug("Récupération des pizzas");
 		return pizzas;
 	}
 
@@ -50,6 +59,8 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	@Override
 	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
 		
+		LOGEXEC.debug("Préparation à la sauvegarde d'une nouvelle pizza...");
+		
 		for(Pizza p : pizzas) {
 			// On vérifie que le code n'existe pas déjà parmi les pizzas
 			if(pizzas.get(p.getId()).getCode().equals(pizza.getCode())) {
@@ -58,6 +69,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		}
 		
 		pizzas.add(pizza);
+		LOGEXEC.debug("...pizza sauvegardée");
 		return true;
 	}
 
@@ -68,6 +80,8 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
 		
+		LOGEXEC.debug("Préparation à la mise à jour d'une pizza...");
+		
 		for(Pizza p : pizzas) {
 			if(p.getCode().equals(codePizza)) {
 				pizzas.get(p.getId()).setCode(pizza.getCode());
@@ -77,6 +91,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 			}
 		}
 		
+		LOGEXEC.debug("...pizza mise à jour");
 		return true;
 	}
 
@@ -88,12 +103,15 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	@Override
 	public boolean deletePizza(String codePizza) {
 		
+		LOGEXEC.debug("Préparation à la suppression d'une pizza...");
+		
 		for(Pizza p : pizzas) {
 			if(pizzas.get(p.getId()).getCode().equals(codePizza)) {
 				pizzas.remove(p);
 			}
 		}
 		
+		LOGEXEC.debug("...pizza supprimée");
 		return true;
 	}
 }
