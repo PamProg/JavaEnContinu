@@ -13,7 +13,7 @@ public abstract class OptionMenu {
 		this.libelle = libelle;
 	}
 	
-	abstract public boolean execute();
+	public abstract boolean execute();
 
 	/**
 	 * @return the libelle

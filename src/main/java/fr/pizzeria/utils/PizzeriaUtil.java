@@ -15,7 +15,7 @@ import fr.pizzeria.exception.PriceDontMatchException;
 import fr.pizzeria.model.CategoriePizza;
 
 /**
- * Classe permettant d'utiliser des méthodes utiles au divers classes du projet
+ * Classe permettant d'utiliser des méthodes utiles aux divers classes du projet
  * @author ETY15
  *
  */

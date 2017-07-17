@@ -22,6 +22,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	
 	public NouvellePizzaOptionMenu(String libelle) {
 		super(libelle);
+		dao = new PizzaDaoMemoire();
 	}
 
 	/**
@@ -34,8 +35,6 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 		String nomString;
 		String prixString;
 		CategoriePizza categorie;
-		
-		dao = new PizzaDaoMemoire();
 		
 		codeString = PizzeriaUtil.askAndCheckCode();
 		nomString = PizzeriaUtil.askAndCheckName();

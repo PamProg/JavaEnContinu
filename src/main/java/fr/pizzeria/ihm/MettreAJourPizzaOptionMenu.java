@@ -38,7 +38,7 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 		
 		String codeChosen = PizzeriaAdmin.getInput().next();
 		
-		if(!codeChosen.equals("99")) {
+		if(!("99").equals(codeChosen)) {
 		
 			String codeString;
 			String nomString;

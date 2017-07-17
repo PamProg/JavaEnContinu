@@ -34,7 +34,7 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 		
 		String codeChosen = PizzeriaAdmin.getInput().next();
 		
-		if(!codeChosen.equals("99")) {
+		if(!("99").equals(codeChosen)) {
 			dao.deletePizza(codeChosen);
 		}
 		
