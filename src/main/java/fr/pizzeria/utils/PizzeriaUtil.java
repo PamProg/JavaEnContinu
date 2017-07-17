@@ -69,6 +69,7 @@ public class PizzeriaUtil {
 				}
 			} catch (PriceDontMatchException e) {
 				LOG.warn(e.getMessage());
+				LOG.error("Erreur", e);
 				correct = false;
 			}
 		} while (!correct);
@@ -96,6 +97,7 @@ public class PizzeriaUtil {
 				}
 			} catch (NameDontMatchException e) {
 				LOG.warn(e.getMessage());
+				LOG.error("Erreur", e);
 				correct = false;
 			}
 		} while (!correct);
@@ -123,6 +125,7 @@ public class PizzeriaUtil {
 				}
 			} catch (CodeDontMatchException e) {
 				LOG.warn(e.getMessage());
+				LOG.error("Erreur", e);
 				correct = false;
 			}
 		} while (!correct);
