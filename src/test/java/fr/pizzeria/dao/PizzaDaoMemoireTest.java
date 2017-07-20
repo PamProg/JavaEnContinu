@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -26,7 +26,7 @@ public class PizzaDaoMemoireTest {
 	@Before
 	public void setUp() {
 		pizzaDaoMem = new PizzaDaoMemoire();
-		PizzaDaoMemoire.initPizzas();
+//		PizzaDaoMemoire.initPizzas();
 //		logConsole = systemOutRule.getLog();
 	}
 	

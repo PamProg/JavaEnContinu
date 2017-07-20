@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.dao.exception;
 
 /**
  * Exception jetée lorsqu'il y a une erreur dans la sauvegarde d'une nouvelle pizza.

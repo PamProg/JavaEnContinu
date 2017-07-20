@@ -39,7 +39,7 @@
 	</appender>
 	
 	<!-- politique de log pour les classes du package fr.pizzeria -->
-	<logger name="fr.pizzeria" level="INFO">
+	<logger name="fr.pizzeria.ihm" level="INFO">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	
@@ -49,7 +49,7 @@
 	</logger>
 	
 	<!-- trace d'exécution du programme -->
-	<logger name="execution-log" level="DEBUG">
+	<logger name="fr.pizzeria.dao" level="DEBUG">
 		<appender-ref ref="EXECUTION" />
 	</logger>
 	

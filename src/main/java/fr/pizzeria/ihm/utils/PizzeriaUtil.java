@@ -1,4 +1,4 @@
-package fr.pizzeria.utils;
+package fr.pizzeria.ihm.utils;
 
 /**
  * Classe contenant plusieurs méthodes utiles au projet.
@@ -8,10 +8,10 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.console.PizzeriaAdmin;
-import fr.pizzeria.exception.CodeDontMatchException;
-import fr.pizzeria.exception.NameDontMatchException;
-import fr.pizzeria.exception.PriceDontMatchException;
+import fr.pizzeria.dao.exception.CodeDontMatchException;
+import fr.pizzeria.dao.exception.NameDontMatchException;
+import fr.pizzeria.dao.exception.PriceDontMatchException;
+import fr.pizzeria.ihm.PizzeriaAdminApp;
 import fr.pizzeria.model.CategoriePizza;
 
 /**
@@ -37,7 +37,7 @@ public class PizzeriaUtil {
 		
 		LOG.info("Veuillez saisir la catégorie");
 		
-		categorieString = PizzeriaAdmin.getInput().next();
+		categorieString = PizzeriaAdminApp.getInput().next();
 		
 		CategoriePizza[] categories = CategoriePizza.values();
 		for(CategoriePizza c : categories) {
@@ -61,7 +61,7 @@ public class PizzeriaUtil {
 			correct = true;
 			LOG.info("Veuillez saisir le prix");
 			try {
-				prixString = PizzeriaAdmin.getInput().next();
+				prixString = PizzeriaAdminApp.getInput().next();
 				
 				// Vérifie que le prix soit positif, contienne uniquement des chiffres, 
 				// 		et soit séparé par un et un seul point "."
@@ -90,7 +90,7 @@ public class PizzeriaUtil {
 			correct = true;
 			LOG.info("Veuillez saisir le nom (sans espace)");
 			try {
-				nomString = PizzeriaAdmin.getInput().next();
+				nomString = PizzeriaAdminApp.getInput().next();
 				
 				// Vérifie que le nom ne contienne pas de chiffre
 				if(!nomString.matches("[^0-9]*")) {
@@ -118,7 +118,7 @@ public class PizzeriaUtil {
 			correct = true;
 			LOG.info("Veuillez saisir le code");
 			try {
-				codeString = PizzeriaAdmin.getInput().next();
+				codeString = PizzeriaAdminApp.getInput().next();
 				
 				// Vérifie que le code soit composé de 3 lettres majuscules
 				if(!codeString.matches("[A-Z]{3}")) {

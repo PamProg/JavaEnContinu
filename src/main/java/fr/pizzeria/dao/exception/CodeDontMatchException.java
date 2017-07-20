@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.dao.exception;
 
 /**
  * Exception jetée lorsque le code de pizza ne contient pas exactement 3 lettres majuscules.

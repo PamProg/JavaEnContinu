@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.console.PizzeriaAdmin;
+import fr.pizzeria.ihm.PizzeriaAdminApp;
 
 /**
  * Classe principale du projet, s'occupe de gérer chaque option du menu.
@@ -38,7 +38,7 @@ public class Menu {
 		do {
 			afficherMenu();
 			
-			response = PizzeriaAdmin.getInput().nextInt();
+			response = PizzeriaAdminApp.getInput().nextInt();
 			
 			// TODO ne plus mettre un switch, simplement récupérer et ensuite gérer l'action par rapport à la saisie
 			switch (response) {

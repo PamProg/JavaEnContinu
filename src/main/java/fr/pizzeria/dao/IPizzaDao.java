@@ -2,7 +2,9 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
-import fr.pizzeria.exception.SavePizzaException;
+import org.apache.commons.lang3.NotImplementedException;
+
+import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -22,23 +24,25 @@ public interface IPizzaDao {
 	/**
 	 * Sauve la pizza (selon la classe qui implémente l'interface : mémoire, fichier, base de données...)
 	 * @param pizza la pizza à stocker
-	 * @return true si le stockage s'est bien passé, false sinon
 	 * @throws SavePizzaException 
 	 */
-	boolean saveNewPizza(Pizza pizza) throws SavePizzaException;
+	void saveNewPizza(Pizza pizza) throws SavePizzaException;
 	
 	/**
 	 * Met à jour une pizza qui existe déjà
 	 * @param codePizza le code de la pizza à mettre à jour
 	 * @param pizza
-	 * @return true si la modification s'est bien passé, false sinon
 	 */
-	boolean updatePizza(String codePizza, Pizza pizza);
+	void updatePizza(String codePizza, Pizza pizza);
 	
 	/**
 	 * Supprime une pizza
 	 * @param codePizza le code de la pizza à supprimer
-	 * @return true si la suppression s'est bien passé, false sinon
 	 */
-	boolean deletePizza(String codePizza);
+	void deletePizza(String codePizza);
+	
+	
+	default void initPizza(List<Pizza> pizzas) {
+		throw new NotImplementedException("Initialisation des pizzas non implémentée");
+	}
 }

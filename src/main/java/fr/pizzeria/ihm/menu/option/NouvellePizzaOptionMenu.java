@@ -1,14 +1,14 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.dao.exception.SavePizzaException;
+import fr.pizzeria.ihm.utils.PizzeriaUtil;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
-import fr.pizzeria.utils.PizzeriaUtil;
 
 /**
  * Permet d'ajouter une nouvelle pizza.

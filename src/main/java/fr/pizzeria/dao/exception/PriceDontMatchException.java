@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.dao.exception;
 
 /**
  * Exception jetée lorsque le prix de la pizza ne correspond pas à un double.

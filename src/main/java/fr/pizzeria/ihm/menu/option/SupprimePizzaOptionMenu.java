@@ -1,11 +1,11 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.console.PizzeriaAdmin;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.ihm.PizzeriaAdminApp;
 
 /**
  * Permet de supprimer une pizza
@@ -32,7 +32,7 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 		LOG.info("Veuillez choisir le code de la pizza à supprimer.");
 		LOG.info("(99 pour abandonner)");
 		
-		String codeChosen = PizzeriaAdmin.getInput().next();
+		String codeChosen = PizzeriaAdminApp.getInput().next();
 		
 		if(!("99").equals(codeChosen)) {
 			dao.deletePizza(codeChosen);

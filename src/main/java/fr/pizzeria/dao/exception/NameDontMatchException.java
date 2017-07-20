@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.dao.exception;
 
 /**
  * Exception jetée lorsque le nom de la pizza contient au moins un chiffre.
