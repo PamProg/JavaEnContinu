@@ -21,9 +21,12 @@ public class PizzeriaAdmin {
 		
 		input = new Scanner(System.in);
 		
-		Menu m = new Menu("***** Pizzeria Administration *****");
-		m.manage();
-		input.close();
+		try {
+			Menu m = new Menu("***** Pizzeria Administration *****");
+			m.manage();
+		} finally {
+			input.close();
+		}
 	}
 
 	/**
