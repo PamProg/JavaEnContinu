@@ -63,7 +63,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		
 		for(Pizza p : pizzas) {
 			// On vérifie que le code n'existe pas déjà parmi les pizzas
-			if(pizzas.get(p.getId()).getCode().equals(pizza.getCode())) {
+			if(p.getCode().equals(pizza.getCode())) {
 				throw new SavePizzaException(("Erreur : Le code de la pizza existe déjà. Pizza non sauvée."));
 			}
 		}
@@ -84,10 +84,10 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		
 		for(Pizza p : pizzas) {
 			if(p.getCode().equals(codePizza)) {
-				pizzas.get(p.getId()).setCode(pizza.getCode());
-				pizzas.get(p.getId()).setNom(pizza.getNom());
-				pizzas.get(p.getId()).setPrix(pizza.getPrix());
-				pizzas.get(p.getId()).setCategorie(pizza.getCategorie());
+				p.setCode(pizza.getCode());
+				p.setNom(pizza.getNom());
+				p.setPrix(pizza.getPrix());
+				p.setCategorie(pizza.getCategorie());
 			}
 		}
 		
@@ -106,7 +106,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		LOGEXEC.debug("Préparation à la suppression d'une pizza...");
 		
 		for(Pizza p : pizzas) {
-			if(pizzas.get(p.getId()).getCode().equals(codePizza)) {
+			if(p.getCode().equals(codePizza)) {
 				pizzas.remove(p);
 			}
 		}
