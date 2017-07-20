@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
@@ -19,19 +20,14 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoireTest {
 
 	private PizzaDaoMemoire pizzaDaoMem;
-	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
-	private String logConsole;
+//	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+//	private String logConsole;
 	
 	@Before
-	public void setUp() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setUp() {
 		pizzaDaoMem = new PizzaDaoMemoire();
 		PizzaDaoMemoire.initPizzas();
-		logConsole = systemOutRule.getLog();
-		
-//		Field pizzasField = PizzaDaoMemoire.class.getDeclaredField("pizzas");
-//		pizzasField.setAccessible(true);
-//		@SuppressWarnings("unchecked")
-//		List<Pizza> pizzas = (List<Pizza>) pizzasField.get(pizzaDaoMem);
+//		logConsole = systemOutRule.getLog();
 	}
 	
 	@Test
@@ -56,7 +52,6 @@ public class PizzaDaoMemoireTest {
 		pizzaDaoMem.saveNewPizza(p);
 		
 //		assertThat(logConsole).contains("Le code de la pizza existe déjà. Pizza non sauvée.");
-		
 	}
 	
 	
@@ -76,10 +71,6 @@ public class PizzaDaoMemoireTest {
 				updated = true;
 			}
 		}
-		
 		assertThat(updated);
 	}
-	
-	
-	
 }
