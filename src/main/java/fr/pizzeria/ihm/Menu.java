@@ -40,6 +40,7 @@ public class Menu {
 			
 			response = PizzeriaAdmin.getInput().nextInt();
 			
+			// TODO ne plus mettre un switch, simplement récupérer et ensuite gérer l'action par rapport à la saisie
 			switch (response) {
 				case 1: 
 					LOG.info("Liste des pizzas");
