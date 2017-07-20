@@ -24,6 +24,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	/**
 	 * Initialise les pizzas originelles
 	 */
+	@Override
 	public void initPizzas(List<Pizza> pizzas) {
 		
 		LOG.info("Initialisation des pizzas...");

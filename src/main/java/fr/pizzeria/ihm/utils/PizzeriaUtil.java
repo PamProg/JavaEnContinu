@@ -21,8 +21,8 @@ import fr.pizzeria.model.CategoriePizza;
  */
 public class PizzeriaUtil {
 
-	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaUtil.class);
-	private static final Logger LOGERROR = LoggerFactory.getLogger("error-log");
+//	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaUtil.class);
+//	private static final Logger LOGERROR = LoggerFactory.getLogger("error-log");
 	
 	/**
 	 * Demande la catégorie de la pizza et vérifie qu'elle soit valide
@@ -31,106 +31,106 @@ public class PizzeriaUtil {
 	 * des catégories, alors la catégorie la plus proche est sélectionnée.
 	 * @return categorieString le prix valide
 	 */
-	public static CategoriePizza askAndCheckCategorie() {
-		String categorieString = null;
-		CategoriePizza cat = null;
-		
-		LOG.info("Veuillez saisir la catégorie");
-		
-		categorieString = PizzeriaAdminApp.getInput().next();
-		
-		CategoriePizza[] categories = CategoriePizza.values();
-		for(CategoriePizza c : categories) {
-			if(LevenshteinDistance.getDefaultInstance().apply(categorieString, c.name()) <= 2) {
-				cat = c;
-			}
-		}
-		
-		return cat;
-	}
+//	public static CategoriePizza askAndCheckCategorie() {
+//		String categorieString = null;
+//		CategoriePizza cat = null;
+//		
+//		LOG.info("Veuillez saisir la catégorie");
+//		
+//		categorieString = PizzeriaAdminApp.getInput().next();
+//		
+//		CategoriePizza[] categories = CategoriePizza.values();
+//		for(CategoriePizza c : categories) {
+//			if(LevenshteinDistance.getDefaultInstance().apply(categorieString, c.name()) <= 2) {
+//				cat = c;
+//			}
+//		}
+//		
+//		return cat;
+//	}
 	
 	/**
 	 * Demande le prix de la pizza et vérifie qu'il soit valide
 	 * @return prixString le prix valide
 	 */
-	public static String askAndCheckPrice() {
-		String prixString = null;
-		boolean correct;
-		// Boucle tant que le prix entré n'est pas bon
-		do {
-			correct = true;
-			LOG.info("Veuillez saisir le prix");
-			try {
-				prixString = PizzeriaAdminApp.getInput().next();
-				
-				// Vérifie que le prix soit positif, contienne uniquement des chiffres, 
-				// 		et soit séparé par un et un seul point "."
-				if(!prixString.matches("[+]?[0-9]+(\\.?[0-9]+)?")) { // On pourrait faire un tout petit peu mieux comme regex...
-					throw new PriceDontMatchException();
-				}
-			} catch (PriceDontMatchException e) {
-				LOG.warn(e.getMessage());
-				LOGERROR.error("Erreur Price", e);
-				correct = false;
-			}
-		} while (!correct);
-		
-		return prixString;
-	}
+//	public static String askAndCheckPrice() {
+//		String prixString = null;
+//		boolean correct;
+//		// Boucle tant que le prix entré n'est pas bon
+//		do {
+//			correct = true;
+//			LOG.info("Veuillez saisir le prix");
+//			try {
+//				prixString = PizzeriaAdminApp.getInput().next();
+//				
+//				// Vérifie que le prix soit positif, contienne uniquement des chiffres, 
+//				// 		et soit séparé par un et un seul point "."
+//				if(!prixString.matches("[+]?[0-9]+(\\.?[0-9]+)?")) { // On pourrait faire un tout petit peu mieux comme regex...
+//					throw new PriceDontMatchException();
+//				}
+//			} catch (PriceDontMatchException e) {
+//				LOG.warn(e.getMessage());
+//				LOGERROR.error("Erreur Price", e);
+//				correct = false;
+//			}
+//		} while (!correct);
+//		
+//		return prixString;
+//	}
 	
 	/**
 	 * Demande le nom de la pizza et vérifie qu'il soit valide
 	 * @return nomString le nom valide
 	 */
-	public static String askAndCheckName() {
-		String nomString = null;
-		boolean correct;
-		// Boucle tant que le nom entré n'est pas bon
-		do {
-			correct = true;
-			LOG.info("Veuillez saisir le nom (sans espace)");
-			try {
-				nomString = PizzeriaAdminApp.getInput().next();
-				
-				// Vérifie que le nom ne contienne pas de chiffre
-				if(!nomString.matches("[^0-9]*")) {
-					throw new NameDontMatchException();
-				}
-			} catch (NameDontMatchException e) {
-				LOG.warn(e.getMessage());
-				LOGERROR.error("Erreur Name", e);
-				correct = false;
-			}
-		} while (!correct);
-		
-		return nomString;
-	}
+//	public static String askAndCheckName() {
+//		String nomString = null;
+//		boolean correct;
+//		// Boucle tant que le nom entré n'est pas bon
+//		do {
+//			correct = true;
+//			LOG.info("Veuillez saisir le nom (sans espace)");
+//			try {
+//				nomString = PizzeriaAdminApp.getInput().next();
+//				
+//				// Vérifie que le nom ne contienne pas de chiffre
+//				if(!nomString.matches("[^0-9]*")) {
+//					throw new NameDontMatchException();
+//				}
+//			} catch (NameDontMatchException e) {
+//				LOG.warn(e.getMessage());
+//				LOGERROR.error("Erreur Name", e);
+//				correct = false;
+//			}
+//		} while (!correct);
+//		
+//		return nomString;
+//	}
 	
 	/**
 	 * Demande le code de la pizza et vérifie qu'il soit valide
 	 * @return codeString le code valide
 	 */
-	public static String askAndCheckCode() {
-		String codeString = null;
-		boolean correct;
-		// Boucle tant que le code entré n'est pas bon
-		do {
-			correct = true;
-			LOG.info("Veuillez saisir le code");
-			try {
-				codeString = PizzeriaAdminApp.getInput().next();
-				
-				// Vérifie que le code soit composé de 3 lettres majuscules
-				if(!codeString.matches("[A-Z]{3}")) {
-					throw new CodeDontMatchException();
-				}
-			} catch (CodeDontMatchException e) {
-				LOG.warn(e.getMessage());
-				LOGERROR.error("Erreur Code", e);
-				correct = false;
-			}
-		} while (!correct);
-		
-		return codeString;
-	}
+//	public static String askAndCheckCode() {
+//		String codeString = null;
+//		boolean correct;
+//		// Boucle tant que le code entré n'est pas bon
+//		do {
+//			correct = true;
+//			LOG.info("Veuillez saisir le code");
+//			try {
+//				codeString = PizzeriaAdminApp.getInput().next();
+//				
+//				// Vérifie que le code soit composé de 3 lettres majuscules
+//				if(!codeString.matches("[A-Z]{3}")) {
+//					throw new CodeDontMatchException();
+//				}
+//			} catch (CodeDontMatchException e) {
+//				LOG.warn(e.getMessage());
+//				LOGERROR.error("Erreur Code", e);
+//				correct = false;
+//			}
+//		} while (!correct);
+//		
+//		return codeString;
+//	}
 }

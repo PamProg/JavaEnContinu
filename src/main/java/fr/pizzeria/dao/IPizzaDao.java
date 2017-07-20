@@ -42,7 +42,7 @@ public interface IPizzaDao {
 	void deletePizza(String codePizza);
 	
 	
-	default void initPizza(List<Pizza> pizzas) {
+	default void initPizzas(List<Pizza> pizzas) {
 		throw new NotImplementedException("Initialisation des pizzas non implémentée");
 	}
 }

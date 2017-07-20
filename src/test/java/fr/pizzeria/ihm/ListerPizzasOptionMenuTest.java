@@ -11,7 +11,7 @@ public class ListerPizzasOptionMenuTest {
 	
 	@Before
 	public void setUp() {
-		listerPizzas = new ListerPizzasOptionMenu("test");
+//		listerPizzas = new ListerPizzasOptionMenu("test");
 	}
 	
 	

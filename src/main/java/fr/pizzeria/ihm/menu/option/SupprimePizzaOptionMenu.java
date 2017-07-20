@@ -1,11 +1,14 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Scanner;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.ihm.PizzeriaAdminApp;
+import fr.pizzeria.model.Pizza;
 
 /**
  * Permet de supprimer une pizza
@@ -15,11 +18,13 @@ import fr.pizzeria.ihm.PizzeriaAdminApp;
 public class SupprimePizzaOptionMenu extends OptionMenu {
 
 	private IPizzaDao dao;
+	private Scanner scanner;
 	private static final Logger LOG = LoggerFactory.getLogger(SupprimePizzaOptionMenu.class);
 	
-	public SupprimePizzaOptionMenu(String libelle) {
-		super("4. Supprimer une pizza");
-		dao = new PizzaDaoMemoire();
+	public SupprimePizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
+		super("Supprimer une pizza");
+		dao = pizzaDao;
+		this.scanner = scanner;
 	}
 
 	/**
@@ -29,10 +34,16 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute() {
 		
+		// On liste d'abord les pizzas
+		for(Pizza p : dao.findAllPizzas()) {
+			LOG.info(p.toString());
+		}
+		
+		LOG.info("Suppression d'une pizza");
 		LOG.info("Veuillez choisir le code de la pizza à supprimer.");
 		LOG.info("(99 pour abandonner)");
 		
-		String codeChosen = PizzeriaAdminApp.getInput().next();
+		String codeChosen = scanner.next();
 		
 		if(!("99").equals(codeChosen)) {
 			dao.deletePizza(codeChosen);

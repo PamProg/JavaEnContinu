@@ -3,6 +3,8 @@ package fr.pizzeria.ihm.menu.option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.dao.IPizzaDao;
+
 /**
  * Permet de sortir du menu
  * @author Pam
@@ -12,7 +14,7 @@ public class SortirOptionMenu extends OptionMenu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SortirOptionMenu.class);
 	
-	public SortirOptionMenu(String libelle) {
+	public SortirOptionMenu() {
 		super("99. Sortir");
 	}
 

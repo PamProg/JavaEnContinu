@@ -25,7 +25,7 @@ public class PizzeriaAdminApp {
 		initPizzas(pizzas);
 		
 		IPizzaDao pizzaDao = new PizzaDaoMemoire();
-		pizzaDao.initPizza(pizzas);
+		pizzaDao.initPizzas(pizzas);
 		
 		try (Scanner scanner = new Scanner(System.in)) {
 			Menu m = new Menu(pizzaDao, scanner, "***** Pizzeria Administration *****");

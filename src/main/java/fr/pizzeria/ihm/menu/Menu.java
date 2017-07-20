@@ -35,63 +35,39 @@ public class Menu {
 		this.pizzaDao = pizzaDao;
 		this.scanner = scanner;
 		this.titre = titre;
-	}
-	
-	/**
-	 * Méthode principale, effectue les différents appellent nécessaires au fonctionnement de l'application
-	 */
-	public void manage() {
+		
 		initActions();
-		
-		int response = OPTION_MENU_SORTIE;
-		
-		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
-		do {
-			afficherMenu();
-			
-			response = scanner.nextInt();
-			
-			// TODO ne plus mettre un switch, simplement récupérer et ensuite gérer l'action par rapport à la saisie
-			switch (response) {
-				case 1: 
-					LOG.info("Liste des pizzas");
-					actions.get(0).execute();
-					break; 
-				case 2: 
-					LOG.info("Ajout d'une nouvelle pizza");
-					actions.get(1).execute();
-					break; 
-				case 3: 
-					actions.get(0).execute();
-					LOG.info("Mise à jour d'une pizza");
-					actions.get(2).execute();
-					break; 
-				case 4: 
-					actions.get(0).execute();
-					LOG.info("Suppression d'une pizza");
-					actions.get(3).execute();
-					break; 
-				case 99: 
-					actions.get(4).execute();
-					break; 
-				default:
-					LOG.warn("Saisie incorrecte");
-					break;
-			}
-		} while (response != OPTION_MENU_SORTIE);
-		
 	}
 	
 	/**
 	 * Initialise toutes nos OptionMenu
 	 */
 	private void initActions() {
-		actions.put(0, new ListerPizzasOptionMenu("1. Lister les pizzas"));
-		actions.put(1, new NouvellePizzaOptionMenu("2. Ajouter une nouvelle pizza"));
-		actions.put(2, new MettreAJourPizzaOptionMenu("3. Mettre à jour une pizza"));
-		actions.put(3, new SupprimePizzaOptionMenu("4. Supprimer une pizza"));
-		actions.put(4, new SortirOptionMenu("99. Sortir"));
+		actions.put(1, new ListerPizzasOptionMenu(pizzaDao));
+		actions.put(2, new NouvellePizzaOptionMenu(pizzaDao, scanner));
+		actions.put(3, new MettreAJourPizzaOptionMenu(pizzaDao, scanner));
+		actions.put(4, new SupprimePizzaOptionMenu(pizzaDao, scanner));
+		actions.put(99, new SortirOptionMenu());
 	}
+	
+	/**
+	 * Méthode principale, effectue les différents appellent nécessaires au fonctionnement de l'application
+	 */
+	public void manage() {
+		
+		
+		int input = OPTION_MENU_SORTIE;
+		
+		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
+		do {
+			afficherMenu();
+			input = scanner.nextInt();
+			actions.get(input).execute();
+		} while (input != OPTION_MENU_SORTIE);
+		
+	}
+	
+	
 
 	/**
 	 * Affiche le menu principal de la pizzeria
