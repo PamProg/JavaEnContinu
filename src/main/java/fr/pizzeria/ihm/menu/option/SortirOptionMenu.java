@@ -13,7 +13,7 @@ public class SortirOptionMenu extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(SortirOptionMenu.class);
 	
 	public SortirOptionMenu(String libelle) {
-		super(libelle);
+		super("99. Sortir");
 	}
 
 	/**

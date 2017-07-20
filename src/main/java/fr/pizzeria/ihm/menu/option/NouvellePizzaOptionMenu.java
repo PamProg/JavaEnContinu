@@ -21,7 +21,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(NouvellePizzaOptionMenu.class);
 	
 	public NouvellePizzaOptionMenu(String libelle) {
-		super(libelle);
+		super("Ajouter une nouvelle pizza");
 		dao = new PizzaDaoMemoire();
 	}
 

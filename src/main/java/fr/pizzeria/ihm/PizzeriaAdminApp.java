@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.ihm.menu.option.Menu;
+import fr.pizzeria.ihm.menu.Menu;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -27,13 +27,9 @@ public class PizzeriaAdminApp {
 		IPizzaDao pizzaDao = new PizzaDaoMemoire();
 		pizzaDao.initPizza(pizzas);
 		
-		Scanner input = new Scanner(System.in);
-		
-		try {
-			Menu m = new Menu("***** Pizzeria Administration *****");
+		try (Scanner scanner = new Scanner(System.in)) {
+			Menu m = new Menu(pizzaDao, scanner, "***** Pizzeria Administration *****");
 			m.manage();
-		} finally {
-			input.close();
 		}
 	}
 
@@ -47,20 +43,6 @@ public class PizzeriaAdminApp {
 		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.FROMAGE));
 		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VEGETARIEN));
 		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-	}
-
-	/**
-	 * @return the input
-	 */
-	public static Scanner getInput() {
-		return input;
-	}
-
-	/**
-	 * @param input the input to set
-	 */
-	public static void setInput(Scanner input) {
-		PizzeriaAdminApp.input = input;
 	}
 
 }

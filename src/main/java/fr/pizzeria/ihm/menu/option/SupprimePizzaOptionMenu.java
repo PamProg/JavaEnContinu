@@ -18,7 +18,7 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(SupprimePizzaOptionMenu.class);
 	
 	public SupprimePizzaOptionMenu(String libelle) {
-		super(libelle);
+		super("4. Supprimer une pizza");
 		dao = new PizzaDaoMemoire();
 	}
 

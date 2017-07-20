@@ -1,12 +1,19 @@
-package fr.pizzeria.ihm.menu.option;
+package fr.pizzeria.ihm.menu;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.ihm.PizzeriaAdminApp;
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.OptionMenu;
+import fr.pizzeria.ihm.menu.option.SortirOptionMenu;
+import fr.pizzeria.ihm.menu.option.SupprimePizzaOptionMenu;
 
 /**
  * Classe principale du projet, s'occupe de gérer chaque option du menu.
@@ -15,15 +22,19 @@ import fr.pizzeria.ihm.PizzeriaAdminApp;
  */
 public class Menu {
 
+	private static final int OPTION_MENU_SORTIE = 99;
 	// Déclaration des variables
 	private String titre;
-	private Map<Integer, OptionMenu> actions;
+	private Map<Integer, OptionMenu> actions = new HashMap<>();
+	private Scanner scanner;
+	private IPizzaDao pizzaDao;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 	
-	public Menu(String titre) {
+	public Menu(IPizzaDao pizzaDao, Scanner scanner, String titre) {
+		this.pizzaDao = pizzaDao;
+		this.scanner = scanner;
 		this.titre = titre;
-		actions = new HashMap<>();
 	}
 	
 	/**
@@ -32,13 +43,13 @@ public class Menu {
 	public void manage() {
 		initActions();
 		
-		int response = -1;
+		int response = OPTION_MENU_SORTIE;
 		
 		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
 		do {
 			afficherMenu();
 			
-			response = PizzeriaAdminApp.getInput().nextInt();
+			response = scanner.nextInt();
 			
 			// TODO ne plus mettre un switch, simplement récupérer et ensuite gérer l'action par rapport à la saisie
 			switch (response) {
@@ -67,7 +78,7 @@ public class Menu {
 					LOG.warn("Saisie incorrecte");
 					break;
 			}
-		} while (response != 99);
+		} while (response != OPTION_MENU_SORTIE);
 		
 	}
 	

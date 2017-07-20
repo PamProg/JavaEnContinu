@@ -18,7 +18,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzasOptionMenu.class);
 	
 	public ListerPizzasOptionMenu(String libelle) {
-		super(libelle);
+		super("Lister les pizzas");
 		dao = new PizzaDaoMemoire();
 	}
 
