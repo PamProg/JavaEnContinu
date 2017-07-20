@@ -64,7 +64,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		for(Pizza p : pizzas) {
 			// On vérifie que le code n'existe pas déjà parmi les pizzas
 			if(pizzas.get(p.getId()).getCode().equals(pizza.getCode())) {
-				throw new SavePizzaException(("Erreur : Le code de la pizza existe déjà. Pizza non sauvée"));
+				throw new SavePizzaException(("Erreur : Le code de la pizza existe déjà. Pizza non sauvée."));
 			}
 		}
 		

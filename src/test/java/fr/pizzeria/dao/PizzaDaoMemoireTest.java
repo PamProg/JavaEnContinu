@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.exception.SavePizzaException;
@@ -17,11 +19,14 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoireTest {
 
 	private PizzaDaoMemoire pizzaDaoMem;
+	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+	private String logConsole;
 	
 	@Before
 	public void setUp() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		pizzaDaoMem = new PizzaDaoMemoire();
 		PizzaDaoMemoire.initPizzas();
+		logConsole = systemOutRule.getLog();
 		
 //		Field pizzasField = PizzaDaoMemoire.class.getDeclaredField("pizzas");
 //		pizzasField.setAccessible(true);
@@ -32,43 +37,47 @@ public class PizzaDaoMemoireTest {
 	@Test
 	public void testFindAllPizzas() {
 		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
-		
 		assertThat(pizzas.size()).isEqualTo(8);
 	}
 	
 	@Test
 	public void testSaveNewPizza() throws SavePizzaException {
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.VIANDE);
+		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
 		pizzaDaoMem.saveNewPizza(p);
 		
-		List<Pizza> pizzas = new ArrayList<>(); 
-		pizzas = pizzaDaoMem.findAllPizzas();
+		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
 		
 		assertThat(pizzas.size()).isEqualTo(9);
 	}
-	@Test
+	
+	@Test(expected = SavePizzaException.class)
 	public void testSaveNewPizzaException() throws SavePizzaException {
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.VIANDE);
+		Pizza p = new Pizza("FRO", "Mozzarella", 13, CategoriePizza.FROMAGE);
 		pizzaDaoMem.saveNewPizza(p);
 		
-		List<Pizza> pizzas = new ArrayList<>(); 
-		pizzas = pizzaDaoMem.findAllPizzas();
+//		assertThat(logConsole).contains("Le code de la pizza existe déjà. Pizza non sauvée.");
 		
-		assertThat(pizzas.size()).isEqualTo(9);
 	}
 	
 	
-	@Test // TODO changer
+	@Test
 	public void testUpdatePizza() throws SavePizzaException {
-		PizzaDaoMemoire.initPizzas();
+		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+		String code = "FRO";
+		String newCode = p.getCode();
 		
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.VIANDE);
-		pizzaDaoMem.saveNewPizza(p);
+		pizzaDaoMem.updatePizza(code, p);
 		
-		List<Pizza> pizzas = new ArrayList<>(); 
-		pizzas = pizzaDaoMem.findAllPizzas();
+		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
 		
-		assertThat(pizzas.size()).isEqualTo(9);
+		boolean updated = false;
+		for(Pizza piz : pizzas) {
+			if(newCode.equals(piz.getCode())) {
+				updated = true;
+			}
+		}
+		
+		assertThat(updated);
 	}
 	
 	
