@@ -23,8 +23,6 @@ public class Pizza {
 	@ToString
 	private CategoriePizza categorie;
 	
-	private static Integer idGenerator = 0;
-	
 	private static final Logger LOG = LoggerFactory.getLogger(Pizza.class);
 	
 	
@@ -35,7 +33,6 @@ public class Pizza {
 	 * @param prix
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
-		this.id = idGenerator++;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;

@@ -14,6 +14,7 @@ import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.OptionMenu;
 import fr.pizzeria.ihm.menu.option.SortirOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimePizzaOptionMenu;
+import fr.pizzeria.ihm.utils.PizzeriaUtil;
 
 /**
  * Classe principale du projet, s'occupe de gérer chaque option du menu.
@@ -28,12 +29,14 @@ public class Menu {
 	private Map<Integer, OptionMenu> actions = new HashMap<>();
 	private Scanner scanner;
 	private IPizzaDao pizzaDao;
+	private PizzeriaUtil pizzeriaUtil;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 	
-	public Menu(IPizzaDao pizzaDao, Scanner scanner, String titre) {
+	public Menu(IPizzaDao pizzaDao, Scanner scanner, PizzeriaUtil pizzeriaUtil, String titre) {
 		this.pizzaDao = pizzaDao;
 		this.scanner = scanner;
+		this.pizzeriaUtil = pizzeriaUtil;
 		this.titre = titre;
 		
 		initActions();
@@ -44,8 +47,8 @@ public class Menu {
 	 */
 	private void initActions() {
 		actions.put(1, new ListerPizzasOptionMenu(pizzaDao));
-		actions.put(2, new NouvellePizzaOptionMenu(pizzaDao, scanner));
-		actions.put(3, new MettreAJourPizzaOptionMenu(pizzaDao, scanner));
+		actions.put(2, new NouvellePizzaOptionMenu(pizzaDao, pizzeriaUtil));
+		actions.put(3, new MettreAJourPizzaOptionMenu(pizzaDao, scanner, pizzeriaUtil));
 		actions.put(4, new SupprimePizzaOptionMenu(pizzaDao, scanner));
 		actions.put(99, new SortirOptionMenu());
 	}

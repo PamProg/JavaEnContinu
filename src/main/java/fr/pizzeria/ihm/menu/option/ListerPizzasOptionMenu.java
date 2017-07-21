@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -19,7 +18,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	
 	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
 		super("Lister les pizzas");
-		dao = pizzaDao;
+		this.dao = pizzaDao;
 	}
 
 	/**

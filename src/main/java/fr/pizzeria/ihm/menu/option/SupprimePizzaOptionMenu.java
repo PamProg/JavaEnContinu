@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.ihm.PizzeriaAdminApp;
 import fr.pizzeria.model.Pizza;
 
 /**

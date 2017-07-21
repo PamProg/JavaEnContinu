@@ -7,6 +7,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.ihm.menu.Menu;
+import fr.pizzeria.ihm.utils.PizzeriaUtil;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -28,7 +29,8 @@ public class PizzeriaAdminApp {
 		pizzaDao.initPizzas(pizzas);
 		
 		try (Scanner scanner = new Scanner(System.in)) {
-			Menu m = new Menu(pizzaDao, scanner, "***** Pizzeria Administration *****");
+			PizzeriaUtil pizzeriaUtil = new PizzeriaUtil(scanner);
+			Menu m = new Menu(pizzaDao, scanner, pizzeriaUtil, "***** Pizzeria Administration *****");
 			m.manage();
 		}
 	}

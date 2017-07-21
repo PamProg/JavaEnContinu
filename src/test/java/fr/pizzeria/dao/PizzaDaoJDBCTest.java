@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -103,6 +102,4 @@ public class PizzaDaoJDBCTest {
 //		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 //		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
 //	}
-	
-	
 }
