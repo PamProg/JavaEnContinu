@@ -103,7 +103,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		// TODO Auto-generated method stub
 		
 	}
 

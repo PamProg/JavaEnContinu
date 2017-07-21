@@ -40,8 +40,11 @@ public class PizzaDaoJDBCTest {
 				+ "categorie VARCHAR(16)"
 				+ ")");
 		statement.execute();
-		
-		statement = conn.prepareStatement("INSERT INTO Pizza(id, code, nom, prix, categorie) "
+	}
+	
+	@Before
+	public void setUp() throws SQLException {
+		PreparedStatement statement = conn.prepareStatement("INSERT INTO Pizza(id, code, nom, prix, categorie) "
 				  + "VALUES(NULL,?,?,?,?)");
 		statement.setString(1, "FRO");
 		statement.setString(2, "4 Fromages");
@@ -52,10 +55,7 @@ public class PizzaDaoJDBCTest {
 		statement.close();
 	}
 	
-	@Before
-	public void setUp() throws SQLException {
-		
-	}
+	
 	
 	@Test
 	public void testFindAllPizzas() throws SQLException {
@@ -72,20 +72,36 @@ public class PizzaDaoJDBCTest {
 		assertThat(pizzas.size()).isEqualTo(2);
 	}
 	
-	@Test
+	@Test(expected = SavePizzaException.class)
 	public void testSaveNewPizzaException() throws SQLException, SavePizzaException {
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+		Pizza p = new Pizza("FRO", "Mozzarella", 13, CategoriePizza.FROMAGE);
 		pizzaDao.saveNewPizza(p);
-		
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size()).isEqualTo(2);
 	}
 	
 	
+	@Test
+	public void testUpdatePizza() throws SQLException {
+		String code = "FRO";
+		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+		pizzaDao.updatePizza(code, p);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		assertThat(pizzas.size()).isEqualTo(1);
+	}
 	
+	
+	@After
+	public void setDown() throws SQLException {
+		conn = DriverManager.getConnection(URL_H2);
+		
+		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE Pizza");
+		statement.execute();
+		
+		statement.close();
+	}
 	
 	@AfterClass
-	public static void setDown() throws SQLException {
+	public static void setDownClass() throws SQLException {
 		conn.close();
 	}
 	

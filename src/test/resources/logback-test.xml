@@ -8,8 +8,6 @@
 		</encoder>
 	</appender>
 	
-	
-	
 	<!-- règle de logs par défaut. Ici : niveau DEBUG vers la un fichier -->
 	<root level="DEBUG">
 		<appender-ref ref="STDOUT" />
