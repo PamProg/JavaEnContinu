@@ -86,7 +86,7 @@ public class PizzaDaoJDBCTest {
 		pizzaDao.updatePizza(code, p);
 		
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size()).isEqualTo(1);
+		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
 	}
 	
 	
