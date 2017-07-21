@@ -19,13 +19,12 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoMemoireTest {
 
-	private static PizzaDaoMemoire pizzaDao = new PizzaDaoMemoire();
-	static List<Pizza> pizzas = new ArrayList<>();
-//	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
-//	private String logConsole;
+	private PizzaDaoMemoire pizzaDao;
 	
-	@BeforeClass
-	public static void setUpClass() {
+	@Before
+	public void setUp() {
+		pizzaDao = new PizzaDaoMemoire();
+		List<Pizza> pizzas = new ArrayList<>();
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.FROMAGE));
 		pizzas.add(new Pizza("REI", "La Reine", 11.50, CategoriePizza.VEGETARIEN));
@@ -34,12 +33,7 @@ public class PizzaDaoMemoireTest {
 		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.FROMAGE));
 		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VEGETARIEN));
 		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-	}
-	
-	@Before
-	public void setUp() {
 		pizzaDao.initPizzas(pizzas);
-//		logConsole = systemOutRule.getLog();
 	}
 	
 	@Test

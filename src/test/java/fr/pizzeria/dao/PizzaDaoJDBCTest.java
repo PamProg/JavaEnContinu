@@ -22,7 +22,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJDBCTest {
 	
 	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
-	private static final String URL_H2 = "jdbc:h2:mem:testdb";
+	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
 	private PizzaDaoJDBC pizzaDao = new PizzaDaoJDBC(DRIVER_MYSQL);
 	private static Connection conn;
 	
@@ -56,6 +56,21 @@ public class PizzaDaoJDBCTest {
 	}
 	
 	
+	@After
+	public void setDown() throws SQLException {
+		conn = DriverManager.getConnection(URL_H2);
+		
+		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE Pizza");
+		statement.execute();
+		
+		statement.close();
+	}
+	
+	@AfterClass
+	public static void setDownClass() throws SQLException {
+		conn.close();
+	}
+	
 	
 	@Test
 	public void testFindAllPizzas() throws SQLException {
@@ -79,30 +94,15 @@ public class PizzaDaoJDBCTest {
 	}
 	
 	
-	@Test
-	public void testUpdatePizza() throws SQLException {
-		String code = "FRO";
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDao.updatePizza(code, p);
-		
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
-	}
+//	@Test
+//	public void testUpdatePizza() throws SQLException {
+//		String code = "FRO";
+//		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+//		pizzaDao.updatePizza(code, p);
+//		
+//		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+//		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
+//	}
 	
-	
-	@After
-	public void setDown() throws SQLException {
-		conn = DriverManager.getConnection(URL_H2);
-		
-		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE Pizza");
-		statement.execute();
-		
-		statement.close();
-	}
-	
-	@AfterClass
-	public static void setDownClass() throws SQLException {
-		conn.close();
-	}
 	
 }

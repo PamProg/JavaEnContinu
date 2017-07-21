@@ -20,7 +20,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJDBC implements IPizzaDao {
 
 	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
-	private static final String URL_H2 = "jdbc:h2:mem:testdb";
+	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoire.class);
 	
 	public PizzaDaoJDBC() {
