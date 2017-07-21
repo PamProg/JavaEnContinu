@@ -37,7 +37,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	@Override
 	public List<Pizza> findAllPizzas() {
 		LOG.debug("Récupération des pizzas");
-		return new ArrayList<Pizza>(pizzas);
+		return new ArrayList<>(pizzas);
 	}
 
 	/**

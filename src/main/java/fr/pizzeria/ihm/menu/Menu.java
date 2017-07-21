@@ -59,8 +59,7 @@ public class Menu {
 	public void manage() {
 		
 		
-		int input = OPTION_MENU_SORTIE;
-		
+		int input;
 		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
 		do {
 			afficherMenu();

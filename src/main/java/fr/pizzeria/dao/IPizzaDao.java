@@ -26,7 +26,7 @@ public interface IPizzaDao {
 	 * @param pizza la pizza à stocker
 	 * @throws SavePizzaException 
 	 */
-	void saveNewPizza(Pizza pizza) throws SavePizzaException;
+	void saveNewPizza(Pizza pizza);
 	
 	/**
 	 * Met à jour une pizza qui existe déjà

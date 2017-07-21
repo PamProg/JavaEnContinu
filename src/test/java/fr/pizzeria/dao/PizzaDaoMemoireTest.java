@@ -68,6 +68,6 @@ public class PizzaDaoMemoireTest {
 				updated = true;
 			}
 		}
-		assertThat(updated);
+		assertThat(updated).isEqualTo(true);
 	}
 }

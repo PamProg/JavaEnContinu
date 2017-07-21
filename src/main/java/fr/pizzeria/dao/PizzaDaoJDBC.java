@@ -71,7 +71,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	}
 
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+	public void saveNewPizza(Pizza pizza) {
 		LOG.debug("Préparation à la sauvegarde d'une nouvelle pizza...");
 		
 		List<Pizza> pizzas = findAllPizzas();
@@ -101,7 +101,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		
+		// TODO a faire
 	}
 
 	@Override
