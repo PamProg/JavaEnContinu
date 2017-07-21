@@ -7,7 +7,7 @@ Session d09 - 26 Juin au 15 Septembre 2017
 
 [![Build Status](http://jenkins.cleverapps.io/buildStatus/icon?job=pierre-antoine-pizzeria)](http://jenkins.cleverapps.io/job/pierre-antoine-pizzeria/)
 
-## Getting Started
+## Présentation
 
 Le projet représente une application de gestion de pizzeria. L'application est décomposée en 3 parties :
 * L'IHM (Interface Homme-Machine)
