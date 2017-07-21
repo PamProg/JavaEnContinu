@@ -67,7 +67,6 @@ public class Menu {
 		
 	}
 	
-	
 
 	/**
 	 * Affiche le menu principal de la pizzeria
@@ -75,9 +74,7 @@ public class Menu {
 	public void afficherMenu() {
 		LOG.info(titre);
 		
-		for(OptionMenu o : actions.values()) {
-			LOG.info(o.getLibelle());
-		}
+		actions.forEach((numero, option) -> LOG.info(numero + ". " + option.getLibelle()));
 	}
 	
 	/**

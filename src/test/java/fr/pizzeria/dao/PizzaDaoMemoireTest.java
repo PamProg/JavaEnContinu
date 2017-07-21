@@ -19,29 +19,29 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoMemoireTest {
 
-	private PizzaDaoMemoire pizzaDaoMem;
+	private PizzaDaoMemoire pizzaDao;
 //	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 //	private String logConsole;
 	
 	@Before
 	public void setUp() {
-		pizzaDaoMem = new PizzaDaoMemoire();
+		pizzaDao = new PizzaDaoMemoire();
 //		PizzaDaoMemoire.initPizzas();
 //		logConsole = systemOutRule.getLog();
 	}
 	
 	@Test
 	public void testFindAllPizzas() {
-		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		assertThat(pizzas.size()).isEqualTo(8);
 	}
 	
 	@Test
 	public void testSaveNewPizza() throws SavePizzaException {
 		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDaoMem.saveNewPizza(p);
+		pizzaDao.saveNewPizza(p);
 		
-		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		
 		assertThat(pizzas.size()).isEqualTo(9);
 	}
@@ -49,7 +49,7 @@ public class PizzaDaoMemoireTest {
 	@Test(expected = SavePizzaException.class)
 	public void testSaveNewPizzaException() throws SavePizzaException {
 		Pizza p = new Pizza("FRO", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDaoMem.saveNewPizza(p);
+		pizzaDao.saveNewPizza(p);
 		
 //		assertThat(logConsole).contains("Le code de la pizza existe déjà. Pizza non sauvée.");
 	}
@@ -61,9 +61,9 @@ public class PizzaDaoMemoireTest {
 		String code = "FRO";
 		String newCode = p.getCode();
 		
-		pizzaDaoMem.updatePizza(code, p);
+		pizzaDao.updatePizza(code, p);
 		
-		List<Pizza> pizzas = pizzaDaoMem.findAllPizzas();
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		
 		boolean updated = false;
 		for(Pizza piz : pizzas) {

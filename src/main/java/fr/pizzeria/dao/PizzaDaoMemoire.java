@@ -47,16 +47,16 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	 * {@link IPizzaDao}
 	 */
 	@Override
-	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
+	public void saveNewPizza(Pizza pizza) {
 		
 		LOG.debug("Préparation à la sauvegarde d'une nouvelle pizza...");
 		
-		for(Pizza p : pizzas) {
-			// On vérifie que le code n'existe pas déjà parmi les pizzas
-			if(p.getCode().equals(pizza.getCode())) {
-				throw new SavePizzaException(("Erreur : Le code de la pizza existe déjà. Pizza non sauvée."));
-			}
-		}
+		pizzas.stream()
+			  .filter(p -> p.getCode().equals(pizza.getCode()))
+			  .findAny()
+			  .ifPresent(p -> {
+				  throw new SavePizzaException("Erreur : Le code de la pizza existe déjà. Pizza non sauvée.");  
+			  });
 		
 		pizzas.add(pizza);
 		LOG.debug("...pizza sauvegardée");

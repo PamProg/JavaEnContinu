@@ -6,7 +6,7 @@ package fr.pizzeria.dao.exception;
  *
  */
 @SuppressWarnings("serial")
-public class SavePizzaException extends Exception {
+public class SavePizzaException extends RuntimeException {
 
 	public SavePizzaException() {
 		super("Erreur lors de la sauvegarde de la pizza. Pizza non sauvée.");

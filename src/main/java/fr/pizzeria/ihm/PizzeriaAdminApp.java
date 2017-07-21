@@ -22,7 +22,7 @@ public class PizzeriaAdminApp {
 	public static void main(String[] args) {
 		
 		List<Pizza> pizzas = new ArrayList<>();
-		initPizzas(pizzas);
+		initPizzasMemoire(pizzas);
 		
 		IPizzaDao pizzaDao = new PizzaDaoMemoire();
 		pizzaDao.initPizzas(pizzas);
@@ -33,7 +33,7 @@ public class PizzeriaAdminApp {
 		}
 	}
 
-	private static void initPizzas(List<Pizza> pizzas) {
+	private static void initPizzasMemoire(List<Pizza> pizzas) {
 		
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.FROMAGE));

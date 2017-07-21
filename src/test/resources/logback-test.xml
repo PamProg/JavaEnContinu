@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- redirection des logs vers la sortir Console Standard -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	
+	
+	<!-- règle de logs par défaut. Ici : niveau DEBUG vers la un fichier -->
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

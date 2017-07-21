@@ -57,7 +57,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 			dao.saveNewPizza(p);
 		} catch (SavePizzaException e) {
 			LOG.warn(e.getMessage());
-			LOG.error("Erreur", e);
+			LOGERROR.error("Erreur", e);
 		}
 		
 		return true;

@@ -15,7 +15,7 @@ public class SortirOptionMenu extends OptionMenu {
 	private static final Logger LOG = LoggerFactory.getLogger(SortirOptionMenu.class);
 	
 	public SortirOptionMenu() {
-		super("99. Sortir");
+		super("Sortir");
 	}
 
 	/**

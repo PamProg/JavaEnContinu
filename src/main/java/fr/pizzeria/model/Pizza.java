@@ -20,6 +20,7 @@ public class Pizza {
 	private String nom;
 	@ToString
 	private double prix;
+	@ToString
 	private CategoriePizza categorie;
 	
 	private static Integer idGenerator = 0;
@@ -35,6 +36,15 @@ public class Pizza {
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		this.id = idGenerator++;
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+	}
+
+
+	public Pizza(Integer id, String code, String nom, double prix, CategoriePizza categorie) {
+		this.id = id;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
