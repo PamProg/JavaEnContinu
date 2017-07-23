@@ -147,11 +147,16 @@ public class Pizza {
 			for(Annotation annot : field.getDeclaredAnnotations()) {
 				// Si l'annotation est "ToString"...
 				if(annot instanceof ToString) {
-					Object obj;
+					
+					// ...on ajoute le nom de l'attribut d'abord...
+					sb.append(field.getName());
+					sb.append(" = ");
+					
+					Object nomAttribut;
 					try {
-						obj = field.get(this);
-						// ...ajouter le nom de l'attribut (pour l'afficher)
-						sb.append(obj.toString());
+						nomAttribut = field.get(this);
+						// ... puis on ajoute la valeur de l'attribut (pour l'afficher)
+						sb.append(nomAttribut.toString());
 						sb.append(" ");
 					} catch (IllegalArgumentException | IllegalAccessException e) {
 						LOG.error("Erreur", e);

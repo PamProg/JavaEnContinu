@@ -7,7 +7,7 @@ package fr.pizzeria.dao.exception;
  *
  */
 @SuppressWarnings("serial")
-public class CodeDontMatchException extends Exception {
+public class CodeDontMatchException extends PizzaException {
 	
 	public CodeDontMatchException() {
 		super("Le code doit contenir exactement 3 lettres majuscules");

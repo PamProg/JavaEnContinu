@@ -7,7 +7,7 @@ package fr.pizzeria.dao.exception;
  *
  */
 @SuppressWarnings("serial")
-public class PriceDontMatchException extends Exception {
+public class PriceDontMatchException extends PizzaException {
 
 	public PriceDontMatchException() {
 		super("Le prix doit être positif et doit contenir uniquement des chiffres, séparés par un et un seul point \".\"");

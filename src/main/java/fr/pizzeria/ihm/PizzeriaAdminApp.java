@@ -35,6 +35,10 @@ public class PizzeriaAdminApp {
 		}
 	}
 
+	/**
+	 * Permet d'initialiser une liste des pizzas avec un jeu de données
+	 * @param pizzas
+	 */
 	private static void initPizzasMemoire(List<Pizza> pizzas) {
 		
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));

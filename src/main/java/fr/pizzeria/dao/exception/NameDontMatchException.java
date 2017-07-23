@@ -7,7 +7,7 @@ package fr.pizzeria.dao.exception;
  *
  */
 @SuppressWarnings("serial")
-public class NameDontMatchException extends Exception {
+public class NameDontMatchException extends PizzaException {
 
 	public NameDontMatchException() {
 		super("Le nom ne doit pas contenir de chiffre");
