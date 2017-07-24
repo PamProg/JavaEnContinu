@@ -3,6 +3,13 @@ package fr.pizzeria.model;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +18,10 @@ import org.slf4j.LoggerFactory;
  * @author ETY15
  *
  */
+@Entity
 public class Pizza {
 
+	@Id @ GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ToString
 	private String code;
@@ -20,14 +29,17 @@ public class Pizza {
 	private String nom;
 	@ToString
 	private double prix;
-	@ToString
+	@ToString @Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Pizza.class);
 	
+	public Pizza() {
+		
+	}
 	
 	/**
-	 * Créé une instance de pizza. Génère un id grâce à l'attribut d'instance idGenerator.
+	 * Créé une instance de pizza
 	 * @param code
 	 * @param nom
 	 * @param prix
@@ -38,7 +50,6 @@ public class Pizza {
 		this.prix = prix;
 		this.categorie = categorie;
 	}
-
 
 	public Pizza(Integer id, String code, String nom, double prix, CategoriePizza categorie) {
 		this.id = id;

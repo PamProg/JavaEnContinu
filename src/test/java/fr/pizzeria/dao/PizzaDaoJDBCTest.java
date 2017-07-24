@@ -20,14 +20,15 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJDBCTest {
 	
-	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
+//	protected static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
+	protected static final String DRIVER_H2 = "org.h2.Driver";
 	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
-	private PizzaDaoJDBC pizzaDao = new PizzaDaoJDBC(DRIVER_MYSQL);
+	private PizzaDaoJDBC pizzaDao = new PizzaDaoJDBC(DRIVER_H2);
 	private static Connection conn;
 	
 	@BeforeClass
 	public static void setUpClass() throws ClassNotFoundException, SQLException {
-		Class.forName(DRIVER_MYSQL);
+//		Class.forName(DRIVER_MYSQL);
 		
 		conn = DriverManager.getConnection(URL_H2);
 		
