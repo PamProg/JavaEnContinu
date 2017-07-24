@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -92,9 +93,10 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		
 		LOG.debug("Préparation à la suppression d'une pizza...");
 		
-		for(Pizza p : pizzas) {
+		for(Iterator<Pizza> it = pizzas.iterator() ; it.hasNext() ;) {
+			Pizza p = it.next();
 			if(p.getCode().equals(codePizza)) {
-				pizzas.remove(p);
+				it.remove();
 			}
 		}
 		

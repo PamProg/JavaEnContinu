@@ -93,7 +93,6 @@ public class PizzaDaoJDBCTest {
 		pizzaDao.saveNewPizza(p);
 	}
 	
-	
 	@Test
 	public void testUpdatePizza() throws SQLException {
 		String code = "FRO";

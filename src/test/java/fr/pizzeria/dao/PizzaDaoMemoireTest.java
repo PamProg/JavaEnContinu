@@ -19,21 +19,14 @@ public class PizzaDaoMemoireTest {
 	public void setUp() {
 		pizzaDao = new PizzaDaoMemoire();
 		List<Pizza> pizzas = new ArrayList<>();
-		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.FROMAGE));
-		pizzas.add(new Pizza("REI", "La Reine", 11.50, CategoriePizza.VEGETARIEN));
 		pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.FROMAGE));
-		pizzas.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.FROMAGE));
-		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VEGETARIEN));
-		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 		pizzaDao.initPizzas(pizzas);
 	}
 	
 	@Test
 	public void testFindAllPizzas() {
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size()).isEqualTo(8);
+		assertThat(pizzas.size()).isEqualTo(1);
 	}
 	
 	@Test
@@ -43,7 +36,7 @@ public class PizzaDaoMemoireTest {
 		
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		
-		assertThat(pizzas.size()).isEqualTo(9);
+		assertThat(pizzas.size()).isEqualTo(2);
 	}
 	
 	@Test(expected = SavePizzaException.class)
@@ -69,5 +62,15 @@ public class PizzaDaoMemoireTest {
 			}
 		}
 		assertThat(updated).isEqualTo(true);
+	}
+	
+	@Test
+	public void testDeletePizza() {
+		String code = "FRO";
+		pizzaDao.deletePizza(code);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		
+		assertThat(pizzas.size()).isEqualTo(0);
 	}
 }
