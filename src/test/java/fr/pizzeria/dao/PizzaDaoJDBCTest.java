@@ -94,13 +94,13 @@ public class PizzaDaoJDBCTest {
 	}
 	
 	
-//	@Test
-//	public void testUpdatePizza() throws SQLException {
-//		String code = "FRO";
-//		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
-//		pizzaDao.updatePizza(code, p);
-//		
-//		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-//		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
-//	}
+	@Test
+	public void testUpdatePizza() throws SQLException {
+		String code = "FRO";
+		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+		pizzaDao.updatePizza(code, p);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
+	}
 }
