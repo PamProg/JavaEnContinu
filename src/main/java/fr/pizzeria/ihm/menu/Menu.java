@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.client.IClientDao;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
@@ -24,11 +25,12 @@ import fr.pizzeria.ihm.utils.PizzeriaUtil;
 public class Menu {
 
 	private static final int OPTION_MENU_SORTIE = 99;
-	// Déclaration des variables
+	
 	private String titre;
 	private Map<Integer, OptionMenu> actions = new HashMap<>();
 	private Scanner scanner;
 	private IPizzaDao pizzaDao;
+	private IClientDao clientDao;
 	private PizzeriaUtil pizzeriaUtil;
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
@@ -40,6 +42,15 @@ public class Menu {
 		this.titre = titre;
 		
 		initActions();
+	}
+	
+	// TODO : eventuellement faire en sorte d'avoir une sorte de DaoHElper qui aurait accès 
+	// à toutes les "sortes" de Dao...
+	public Menu(IClientDao clientDao, Scanner scanner, PizzeriaUtil pizzeriaUtil, String titre) {
+		this.clientDao = clientDao;
+		this.scanner = scanner;
+		this.pizzeriaUtil = pizzeriaUtil;
+		this.titre = titre;
 	}
 	
 	/**

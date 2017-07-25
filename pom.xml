@@ -18,10 +18,18 @@
 	<dependencies>
 
 		<!-- UTIL -->
+		<!-- permet d'utiliser la distance de Levenstein -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
 			<version>1.1</version>
+		</dependency>
+		<!-- permet d'utiliser des fonctions de hashage (SHA512 notamment) -->
+		<dependency>
+			<groupId>org.eclipse.ecf</groupId>
+			<artifactId>org.apache.commons.codec</artifactId>
+			<version>1.9.0.v20170208-1614</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- BDD -->

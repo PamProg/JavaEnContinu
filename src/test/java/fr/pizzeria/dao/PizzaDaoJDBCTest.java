@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,7 +13,6 @@ import org.junit.BeforeClass;
 
 public class PizzaDaoJDBCTest extends PizzaDaoTest {
 	
-	protected static final String DRIVER_H2 = "org.h2.Driver";
 	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
 	private static Connection conn;
 	
@@ -49,15 +49,15 @@ public class PizzaDaoJDBCTest extends PizzaDaoTest {
 	
 	@After
 	public void setDown() throws SQLException {
-		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE pizza");
-		statement.execute();
+		Statement statement = conn.createStatement();
+		statement.execute("TRUNCATE TABLE pizza");
 		statement.close();
 	}
 	
 	@AfterClass
 	public static void setDownClass() throws SQLException {
-		PreparedStatement statement = conn.prepareStatement("DROP TABLE pizza");
-		statement.execute();
+		Statement statement = conn.createStatement();
+		statement.execute("DROP TABLE pizza IF EXISTS");
 		statement.close();
 		
 		conn.close();

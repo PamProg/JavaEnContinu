@@ -29,6 +29,21 @@ public class Client {
 	}
 	
 	/**
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param motDePasse
+	 */
+	public Client(String nom, String prenom, String email, String motDePasse) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+	}
+
+
+
+	/**
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -88,5 +103,4 @@ public class Client {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	
 }

@@ -139,4 +139,76 @@ public class PizzeriaUtil {
 		
 		return codeString;
 	}
+
+	public String askAndCheckFirstName() {
+		String nomString = null;
+		boolean correct;
+		// Boucle tant que le nom entré n'est pas bon
+		do {
+			correct = true;
+			LOG.info("Veuillez saisir le prenom (sans espace)");
+			try {
+				nomString = scanner.next();
+				
+				// Vérifie que le prénom ne contienne pas de chiffre
+				if(!nomString.matches("[^0-9]*")) {
+					throw new NameDontMatchException();
+				}
+			} catch (NameDontMatchException e) {
+				LOG.warn(e.getMessage());
+				LOGERROR.error("Erreur Firstname", e);
+				correct = false;
+			}
+		} while (!correct);
+		
+		return nomString;
+	}
+
+	public String askAndCheckEmail() {
+		String nomString = null;
+		boolean correct;
+		// Boucle tant que le nom entré n'est pas bon
+		do {
+			correct = true;
+			LOG.info("Veuillez saisir l'email (sans espace)");
+			try {
+				nomString = scanner.next();
+				
+				// TODO : changer le regex pour correspondre à un email
+				if(!nomString.matches(".*@.*")) {
+					throw new NameDontMatchException();
+				}
+			} catch (NameDontMatchException e) {
+				LOG.warn(e.getMessage());
+				LOGERROR.error("Erreur Email", e);
+				correct = false;
+			}
+		} while (!correct);
+		
+		return nomString;
+	}
+
+	public String askAndCheckPassword() {
+		String nomString = null;
+		boolean correct;
+		// Boucle tant que le nom entré n'est pas bon
+		do {
+			correct = true;
+			LOG.info("Veuillez saisir le mot de passe (sans espace)");
+			try {
+				nomString = scanner.next();
+				
+				// TODO changer le regex ?
+				if(!nomString.matches(".*")) {
+					throw new NameDontMatchException();
+				}
+			} catch (NameDontMatchException e) {
+				LOG.warn(e.getMessage());
+				LOGERROR.error("Erreur Mot de passe", e);
+				correct = false;
+			}
+		} while (!correct);
+		
+		return nomString;
+	}
 }

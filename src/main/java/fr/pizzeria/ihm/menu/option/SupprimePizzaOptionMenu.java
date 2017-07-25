@@ -21,7 +21,7 @@ public class SupprimePizzaOptionMenu extends OptionMenu {
 	
 	public SupprimePizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
 		super("Supprimer une pizza");
-		dao = pizzaDao;
+		this.dao = pizzaDao;
 		this.scanner = scanner;
 	}
 
