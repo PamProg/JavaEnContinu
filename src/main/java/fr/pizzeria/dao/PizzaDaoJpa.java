@@ -70,13 +70,17 @@ public class PizzaDaoJpa implements IPizzaDao {
 		et.begin();
 		LOG.debug("Préparation à la modification d'une pizza...");
 
-		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p where p.code=':code", Pizza.class)
-									.setParameter("cod", codePizza);
+		// On récupère la pizza de code codePizza
+		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
+									.setParameter("code", codePizza);
 		Pizza p = query.getSingleResult();
 		
+		// Si elle existe...
 		if(p != null) {
+			// ...on remplace son id par l'id de la "nouvelle" pizza...
 			pizza.setId(p.getId());
-			em.merge(p);
+			// ...puis on "écrase" les données de la nouvelle pizza dans celle en base
+			em.merge(pizza);
 		} // TODO gérer le else{}
 		
 		LOG.debug("...pizza modifiée");
@@ -86,7 +90,25 @@ public class PizzaDaoJpa implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		LOG.debug("Préparation à la suppression d'une pizza...");
 		
+		// On récupère la pizza de code codePizza
+		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p where p.code=:code", Pizza.class)
+									.setParameter("code", codePizza);
+		Pizza p = query.getSingleResult();
+		
+		// Si elle existe...
+		if(p != null) {
+			// ...on la supprime de la base de données
+			em.remove(p);
+		} // TODO gérer le else{}
+		
+		LOG.debug("...pizza supprimée");
+		et.commit(); // TODO gérer le rollback
+		em.close();
 	}
 
 }

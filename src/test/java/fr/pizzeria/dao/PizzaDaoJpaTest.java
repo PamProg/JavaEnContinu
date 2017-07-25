@@ -16,7 +16,7 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJpaTest extends PizzaDaoJDBCTest{
 
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-annotation");
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-annotation");
 	private PizzaDaoJpa pizzaDao = new PizzaDaoJpa(emf);
 	
 	@Test
@@ -38,5 +38,25 @@ public class PizzaDaoJpaTest extends PizzaDaoJDBCTest{
 	public void testSaveNewPizzaException() throws SQLException, SavePizzaException {
 		Pizza p = new Pizza("FRO", "Mozzarella", 13, CategoriePizza.FROMAGE);
 		pizzaDao.saveNewPizza(p);
+	}
+	
+	@Test
+	public void testUpdatePizza() throws SQLException {
+		String code = "FRO";
+		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
+		pizzaDao.updatePizza(code, p);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
+	}
+	
+	@Test
+	public void testDeletePizza() {
+		String code = "FRO";
+		pizzaDao.deletePizza(code);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		
+		assertThat(pizzas.size()).isEqualTo(0);
 	}
 }
