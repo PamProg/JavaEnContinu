@@ -20,7 +20,6 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJDBCTest {
 	
-//	protected static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
 	protected static final String DRIVER_H2 = "org.h2.Driver";
 	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
 	private PizzaDaoJDBC pizzaDao = new PizzaDaoJDBC(DRIVER_H2);
@@ -28,11 +27,11 @@ public class PizzaDaoJDBCTest {
 	
 	@BeforeClass
 	public static void setUpClass() throws ClassNotFoundException, SQLException {
-//		Class.forName(DRIVER_MYSQL);
+		Class.forName(DRIVER_H2);
 		
 		conn = DriverManager.getConnection(URL_H2);
 		
-		PreparedStatement statement = conn.prepareStatement("CREATE TABLE Pizza ("
+		PreparedStatement statement = conn.prepareStatement("CREATE TABLE pizza ("
 				+ "id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY,"
 				+ "code VARCHAR(3) NOT NULL,"
 				+ "nom VARCHAR(32) NOT NULL,"
@@ -44,7 +43,7 @@ public class PizzaDaoJDBCTest {
 	
 	@Before
 	public void setUp() throws SQLException {
-		PreparedStatement statement = conn.prepareStatement("INSERT INTO Pizza(id, code, nom, prix, categorie) "
+		PreparedStatement statement = conn.prepareStatement("INSERT INTO pizza(id, code, nom, prix, categorie) "
 				  + "VALUES(NULL,?,?,?,?)");
 		statement.setString(1, "FRO");
 		statement.setString(2, "4 Fromages");
@@ -60,7 +59,7 @@ public class PizzaDaoJDBCTest {
 	public void setDown() throws SQLException {
 		conn = DriverManager.getConnection(URL_H2);
 		
-		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE Pizza");
+		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE pizza");
 		statement.execute();
 		
 		statement.close();
@@ -101,5 +100,15 @@ public class PizzaDaoJDBCTest {
 		
 		List<Pizza> pizzas = pizzaDao.findAllPizzas();
 		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
+	}
+	
+	@Test
+	public void testDeletePizza() {
+		String code = "FRO";
+		pizzaDao.deletePizza(code);
+		
+		List<Pizza> pizzas = pizzaDao.findAllPizzas();
+		
+		assertThat(pizzas.size()).isEqualTo(0);
 	}
 }

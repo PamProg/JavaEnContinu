@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,8 +22,9 @@ public class Commande {
 	private Integer id;
 	
 	@Column(name = "numero_commande")
-	private Integer numeroCommande;
-	private String statut;
+	private String numeroCommande;
+	@Enumerated(EnumType.STRING)
+	private Statut statut;
 	@Column(name = "date_commande")
 	private LocalDateTime dateCommande;
 	
@@ -56,25 +59,25 @@ public class Commande {
 	/**
 	 * @return the numeroCommande
 	 */
-	public Integer getNumeroCommande() {
+	public String getNumeroCommande() {
 		return numeroCommande;
 	}
 	/**
 	 * @param numeroCommande the numeroCommande to set
 	 */
-	public void setNumeroCommande(Integer numeroCommande) {
+	public void setNumeroCommande(String numeroCommande) {
 		this.numeroCommande = numeroCommande;
 	}
 	/**
 	 * @return the statut
 	 */
-	public String getStatut() {
+	public Statut getStatut() {
 		return statut;
 	}
 	/**
 	 * @param statut the statut to set
 	 */
-	public void setStatut(String statut) {
+	public void setStatut(Statut statut) {
 		this.statut = statut;
 	}
 	/**

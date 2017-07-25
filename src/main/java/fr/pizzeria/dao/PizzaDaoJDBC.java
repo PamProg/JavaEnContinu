@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,18 +18,15 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJDBC implements IPizzaDao {
 
 	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
-	private static final String DRIVER_H2 = "DRIVER_H2";
 	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
-	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoire.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 
 	public PizzaDaoJDBC() {
-
 		try {
 			Class.forName(DRIVER_MYSQL);
 		} catch (ClassNotFoundException e) {
 			LOG.error(e.getMessage(), e);
 		}
-
 	}
 
 	public PizzaDaoJDBC(String driver) {
@@ -39,7 +35,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		} catch (ClassNotFoundException e) {
 			LOG.error(e.getMessage(), e);
 		}
-
 	}
 
 	@Override
@@ -48,7 +43,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 		LOG.debug("Récupération des pizzas...");
 
-		String query = "SELECT * FROM Pizza";
+		String query = "SELECT * FROM pizza";
 
 		try (Connection conn = DriverManager.getConnection(URL_H2);
 				PreparedStatement statement = conn.prepareStatement(query);
@@ -80,7 +75,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			throw new SavePizzaException("Erreur : Le code de la pizza existe déjà. Pizza non sauvée.");
 		});
 
-		String query = "INSERT INTO Pizza(id, code, nom, prix, categorie) VALUES(NULL,?,?,?,?)";
+		String query = "INSERT INTO pizza(id, code, nom, prix, categorie) VALUES(NULL,?,?,?,?)";
 
 		try (Connection conn = DriverManager.getConnection(URL_H2);
 				PreparedStatement statement = conn.prepareStatement(query)) {
@@ -98,34 +93,18 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		
 		LOG.debug("Préparation à la modification d'une pizza...");
 
-		List<Pizza> pizzas = findAllPizzas();
-		Optional<Pizza> pizzaToUpdateOpt = pizzas.stream().filter(p -> p.getCode().equals(codePizza)).findAny();
-		Pizza pizzaToUpdate = pizzaToUpdateOpt.get();
-		String findQuery = "Select * FROM Pizza P WHERE P.code=?";
-		String updateQuery = "UPDATE Pizza SET id=?, code=?, nom=?, categorie=? WHERE id=";
+		String updateQuery = "UPDATE pizza SET code=?, nom=?, categorie=? WHERE code=?";
 		
-		try (Connection conn = DriverManager.getConnection(URL_H2)) {
-			// On récupère d'abord la Pizza contenant le codePizza...
-			PreparedStatement statement = conn.prepareStatement(findQuery);
-			statement.setString(1, pizzaToUpdate.getCode());
-			ResultSet res = statement.executeQuery();
-			// ...seul l'id nous intéresse en réalité
-			Integer idPizzaToUpdate = res.getInt("id");
+		try (Connection conn = DriverManager.getConnection(URL_H2);
+			 PreparedStatement statement = conn.prepareStatement(updateQuery)) {
 			
-			// On peut maintenant mettre à jour la pizza
-			statement = conn.prepareStatement(updateQuery);
-			statement.setInt(1, pizza.getId());
-			statement.setString(2, pizza.getCode());
-			statement.setString(3, pizza.getNom());
-			statement.setString(4, String.valueOf(pizza.getCategorie()));
-			statement.setInt(5, idPizzaToUpdate);
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getNom());
+			statement.setString(3, String.valueOf(pizza.getCategorie()));
+			statement.setString(4, codePizza);
 			statement.executeUpdate();
-			
-			res.close();
-			statement.close();
 		} catch (SQLException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -135,8 +114,19 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
-
+		LOG.debug("Préparation à la suppression d'une pizza...");
+		
+		String updateQuery = "DELETE FROM pizza WHERE code=?";
+		
+		try (Connection conn = DriverManager.getConnection(URL_H2);
+			 PreparedStatement statement = conn.prepareStatement(updateQuery)) {
+			
+			statement.setString(1, codePizza);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		
+		LOG.debug("...pizza supprimée");
 	}
-
 }
