@@ -12,6 +12,8 @@
 			<property name="javax.persistence.jdbc.password" value="pizzeria"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			<!-- Permet de faire en sorte que le moteur de base de données par défaut soit InnoDB sur MySQL (et non MyISAM) -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 		</properties>
 	</persistence-unit>
 </persistence>

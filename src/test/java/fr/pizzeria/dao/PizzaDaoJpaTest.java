@@ -1,62 +1,32 @@
 package fr.pizzeria.dao;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.sql.SQLException;
-import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.junit.Test;
+import org.junit.Before;
 
-import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoJpaTest extends PizzaDaoJDBCTest{
+public class PizzaDaoJpaTest extends PizzaDaoTest{
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-annotation");
-	private PizzaDaoJpa pizzaDao = new PizzaDaoJpa(emf);
 	
-	@Test
-	public void testFindAllPizzas() throws SQLException {
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size()).isEqualTo(1);
-	}
-	
-	@Test
-	public void testSaveNewPizza() throws SQLException, SavePizzaException {
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDao.saveNewPizza(p);
+	@Before
+	public void setUp() throws SQLException {
+		pizzaDao = new PizzaDaoJpa(emf, DRIVER_H2);
 		
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.size()).isEqualTo(2);
-	}
-	
-	@Test(expected = SavePizzaException.class)
-	public void testSaveNewPizzaException() throws SQLException, SavePizzaException {
-		Pizza p = new Pizza("FRO", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDao.saveNewPizza(p);
-	}
-	
-	@Test
-	public void testUpdatePizza() throws SQLException {
-		String code = "FRO";
-		Pizza p = new Pizza("MOZ", "Mozzarella", 13, CategoriePizza.FROMAGE);
-		pizzaDao.updatePizza(code, p);
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
 		
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		assertThat(pizzas.get(0).getCode()).isEqualTo(p.getCode());
-	}
-	
-	@Test
-	public void testDeletePizza() {
-		String code = "FRO";
-		pizzaDao.deletePizza(code);
+		et.begin();
+		em.persist(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.FROMAGE));
+		et.commit();
 		
-		List<Pizza> pizzas = pizzaDao.findAllPizzas();
-		
-		assertThat(pizzas.size()).isEqualTo(0);
+		em.close();
 	}
 }

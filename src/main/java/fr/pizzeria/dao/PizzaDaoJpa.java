@@ -15,15 +15,29 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJpa implements IPizzaDao {
 
-//	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
-//	private static final String DRIVER_H2 = "DRIVER_H2";
-//	private static final String URL_H2 = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
+	private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJpa.class);
 	
 	private EntityManagerFactory emf;
 
 	public PizzaDaoJpa(EntityManagerFactory emf) {
 		this.emf = emf;
+		
+		try {
+			Class.forName(DRIVER_MYSQL);
+		} catch (ClassNotFoundException e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
+	
+	public PizzaDaoJpa(EntityManagerFactory emf, String driver) {
+		this.emf = emf;
+
+		try {
+			Class.forName(driver);
+		} catch (ClassNotFoundException e) {
+			LOG.error(e.getMessage(), e);
+		}
 	}
 	
 	@Override
