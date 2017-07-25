@@ -49,16 +49,17 @@ public class PizzaDaoJDBCTest extends PizzaDaoTest {
 	
 	@After
 	public void setDown() throws SQLException {
-		conn = DriverManager.getConnection(URL_H2);
-		
 		PreparedStatement statement = conn.prepareStatement("TRUNCATE TABLE pizza");
 		statement.execute();
-		
 		statement.close();
 	}
 	
 	@AfterClass
 	public static void setDownClass() throws SQLException {
+		PreparedStatement statement = conn.prepareStatement("DROP TABLE pizza");
+		statement.execute();
+		statement.close();
+		
 		conn.close();
 	}
 }
