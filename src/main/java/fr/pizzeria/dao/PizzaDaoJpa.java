@@ -26,7 +26,12 @@ public class PizzaDaoJpa implements IPizzaDao {
 		this.emf = emf;
 	}
 	
-
+	@Override
+	public void initPizzas(List<Pizza> pizzas) {
+		
+		// TODO
+	}
+	
 	@Override
 	public List<Pizza> findAllPizzas() {
 		EntityManager em = emf.createEntityManager();

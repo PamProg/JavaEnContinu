@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.ihm.menu.Menu;
 import fr.pizzeria.ihm.utils.PizzeriaUtil;
 import fr.pizzeria.model.CategoriePizza;
@@ -25,7 +28,8 @@ public class PizzeriaAdminApp {
 		List<Pizza> pizzas = new ArrayList<>();
 		initPizzasMemoire(pizzas);
 		
-		IPizzaDao pizzaDao = new PizzaDaoMemoire();
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-annotation");
+		IPizzaDao pizzaDao = new PizzaDaoJpa(emf);
 		pizzaDao.initPizzas(pizzas);
 		
 		try (Scanner scanner = new Scanner(System.in)) {
